@@ -1,0 +1,12 @@
+start        active   0.0  peak   0.0  cache  0.0 GiB  |  swap 0 MiB  free 87%
+text encoder load   10.3s  run     3.5s  release  0.1s  active  8.5  released  0.0 GiB
+  step  1/6   340.6s  sigma video 1.00000 audio 1.00000  active  11.2  peak  14.5  cache  7.2 GiB  |  swap 0 MiB  free 28%
+  step  2/6   303.2s  sigma video 0.98368 audio 0.93778  active  11.2  peak  14.5  cache  7.2 GiB  |  swap 0 MiB  free 28%
+  step  3/6   304.5s  sigma video 0.96006 audio 0.85733  active  11.2  peak  14.5  cache  7.2 GiB  |  swap 0 MiB  free 28%
+  step  4/6   304.9s  sigma video 0.92308 audio 0.75000  active  11.2  peak  14.5  cache  7.2 GiB  |  swap 0 MiB  free 28%
+  step  5/6   301.9s  sigma video 0.85751 audio 0.60072  active  11.2  peak  14.5  cache  7.2 GiB  |  swap 0 MiB  free 29%
+  step  6/6   303.8s  sigma video 0.70638 audio 0.37556  active  11.2  peak  14.5  cache  7.2 GiB  |  swap 0 MiB  free 29%
+DiT          load   22.3s  run  1822.6s  release  0.1s  active 11.2  released  0.0 GiB
+video VAE    load    5.5s  run   136.0s  release  0.1s  active  5.1  released  0.6 GiB
+audio VAE    load    0.3s  run     3.5s  release  0.1s  active  0.9  released  0.6 GiB
+wrote <OUTPUT_DIR>/h3-final-spiderman-nyc-640x352-243f-s6.mp4  tokens 194  sequence 16844  elapsed 33.4 min

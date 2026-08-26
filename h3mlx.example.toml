@@ -1,0 +1,45 @@
+# Copy this file to h3mlx.local.toml. Absolute paths are recommended.
+
+[runtime]
+repo = "/path/to/mlx-h3"
+executable = "/path/to/mlx-h3/.venv/bin/mlx-h3"
+python = "/path/to/mlx-h3/.venv/bin/python"
+
+[models]
+tokenizer = "/path/to/H3-2bitTE-4bitDiT/tokenizer.json"
+text_encoder = "/path/to/H3-2bitTE-4bitDiT/text_encoder.safetensors"
+dit = "/path/to/H3-2bitTE-4bitDiT/transformer.safetensors"
+video_vae = "/path/to/H3-2bitTE-4bitDiT/video_vae.safetensors"
+audio_vae = "/path/to/H3-2bitTE-4bitDiT/audio_vae.safetensors"
+turbo_lora = "/path/to/H3-2bitTE-4bitDiT/turbo_lora.safetensors"
+
+[storage]
+output_dir = "outputs"
+run_dir = "runs"
+
+[defaults]
+preset = "preview"
+
+[presets.smoke]
+width = 512
+height = 288
+frames = 22
+steps = 4
+seed = 42
+budget = 20
+
+[presets.preview]
+width = 640
+height = 352
+frames = 124
+steps = 4
+seed = 42
+budget = 20
+
+[presets.final10]
+width = 640
+height = 352
+frames = 243
+steps = 6
+seed = 20260826
+budget = 20

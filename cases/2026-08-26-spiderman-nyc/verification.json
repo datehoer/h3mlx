@@ -1,0 +1,27 @@
+{
+  "ok": true,
+  "path": "<OUTPUT_DIR>/h3-final-spiderman-nyc-640x352-243f-s6.mp4",
+  "sha256": "4041a6a70dea30cc173dcf45634e4046b6e355806285997b1b5e083861baa0ad",
+  "size_bytes": 6434460,
+  "duration_seconds": 10.125,
+  "video": {
+    "codec": "h264",
+    "width": 640,
+    "height": 352,
+    "fps": 24,
+    "frames": 243,
+    "bit_rate": 4882059
+  },
+  "audio": {
+    "codec": "aac",
+    "sample_rate": 32000,
+    "channels": 2,
+    "channel_layout": "stereo",
+    "bit_rate": 194005,
+    "peak_level_db": -0.859218,
+    "rms_level_db": -18.893381,
+    "nan_samples": 0,
+    "infinite_samples": 0,
+    "denormal_samples": 0
+  }
+}

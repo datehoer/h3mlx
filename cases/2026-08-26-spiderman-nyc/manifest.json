@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "status": "completed",
+  "created_at": "2026-08-26T21:49:04+08:00",
+  "runtime": {
+    "project": "appautomaton/mlx-h3",
+    "version": "0.0.1a3",
+    "git_commit": "762b280",
+    "dirty_files": [
+      "src/mlx_h3/loading.py",
+      "tests/test_loading.py"
+    ],
+    "python": "3.13.12",
+    "mlx": "0.32.0",
+    "ffmpeg": "9.0.1"
+  },
+  "host": {
+    "model": "Mac Studio Mac13,1",
+    "chip": "Apple M1 Max",
+    "cpu_cores": 10,
+    "gpu_cores": 24,
+    "unified_memory_bytes": 34359738368,
+    "os": "macOS 15.7.2 (24G325)"
+  },
+  "parameters": {
+    "width": 640,
+    "height": 352,
+    "frames": 243,
+    "fps": 24,
+    "duration_seconds": 10.125,
+    "steps": 6,
+    "seed": 20260826,
+    "budget_gib": 20,
+    "prompt_tokens": 194,
+    "sequence_length": 16844,
+    "solver": "paired-schedule Euler via Turbo LoRA"
+  },
+  "models": {
+    "tokenizer": {
+      "path": "<H3_MODEL_DIR>/tokenizer.json",
+      "resolved_path": "<MLX_SERVE_4BIT_DIR>/tokenizer.json",
+      "size_bytes": 7032403
+    },
+    "text_encoder": {
+      "path": "<H3_MODEL_DIR>/text_encoder.safetensors",
+      "size_bytes": 9595816442,
+      "quantization": "affine 2-bit g64",
+      "tensor_count": 1780
+    },
+    "dit": {
+      "path": "<H3_MODEL_DIR>/transformer.safetensors",
+      "resolved_path": "<MLX_SERVE_4BIT_DIR>/transformer.safetensors",
+      "size_bytes": 18698813290,
+      "quantization": "affine 4-bit g64",
+      "tensor_count": 1055
+    },
+    "video_vae": {
+      "path": "<H3_MODEL_DIR>/video_vae.safetensors",
+      "size_bytes": 5207808496,
+      "dtype": "FP16",
+      "tensor_count": 562
+    },
+    "audio_vae": {
+      "path": "<H3_MODEL_DIR>/audio_vae.safetensors",
+      "size_bytes": 605254808,
+      "dtype": "FP32",
+      "tensor_count": 917
+    },
+    "turbo_lora": {
+      "path": "<H3_MODEL_DIR>/turbo_lora.safetensors",
+      "size_bytes": 779849816,
+      "dtype": "BF16",
+      "tensor_count": 518,
+      "source": "minimax_h3_turbo_4step_ema_ckpt850.safetensors"
+    }
+  },
+  "timing_seconds": {
+    "text_encoder_load": 10.3,
+    "text_encoder_run": 3.5,
+    "dit_load": 22.3,
+    "dit_run": 1822.6,
+    "video_vae_load": 5.5,
+    "video_vae_run": 136.0,
+    "audio_vae_load": 0.3,
+    "audio_vae_run": 3.5,
+    "reported_elapsed_minutes": 33.4
+  },
+  "memory": {
+    "dit_active_gib": 11.2,
+    "dit_peak_gib": 14.5,
+    "dit_cache_gib": 7.2,
+    "swap_mib": 0
+  },
+  "prompt_file": "prompt.txt",
+  "prompt_sha256": "15a585dc278bd13edf06039efee98e871661783aa51a86e0fbd66dd50ad48444",
+  "log_file": "run.log",
+  "verification_file": "verification.json",
+  "output": "<OUTPUT_DIR>/h3-final-spiderman-nyc-640x352-243f-s6.mp4",
+  "command": [
+    "<MLX_H3_REPO>/.venv/bin/mlx-h3",
+    "<prompt from prompt.txt>",
+    "--width", "640",
+    "--height", "352",
+    "--frames", "243",
+    "--steps", "6",
+    "--seed", "20260826",
+    "--budget", "20",
+    "--tokenizer", "<H3_MODEL_DIR>/tokenizer.json",
+    "--text-encoder", "<H3_MODEL_DIR>/text_encoder.safetensors",
+    "--dit", "<H3_MODEL_DIR>/transformer.safetensors",
+    "--video-vae", "<H3_MODEL_DIR>/video_vae.safetensors",
+    "--audio-vae", "<H3_MODEL_DIR>/audio_vae.safetensors",
+    "--turbo-lora", "<H3_MODEL_DIR>/turbo_lora.safetensors",
+    "--output", "<OUTPUT_DIR>/h3-final-spiderman-nyc-640x352-243f-s6.mp4"
+  ]
+}
