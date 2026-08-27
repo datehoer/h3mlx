@@ -27,6 +27,11 @@ compressed or evicted from the `mlx-h3` process. Because `vmmap` process totals 
 disk-swap proof alone, the guard requires material growth in both counters. This changes
 the guard decision and telemetry, not model numerics or the staged-residency order.
 
+Both local runtime changes are published in the `h3mlx-local-profile` default branch of
+[`datehoer/mlx-h3`](https://github.com/datehoer/mlx-h3), currently at `d5d1791`. The fork
+retains `appautomaton/mlx-h3` as its upstream provenance while making this operational
+profile reproducible on a fresh checkout.
+
 ## Models
 
 | Role | Precision | Bytes | Notes |

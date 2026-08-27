@@ -20,6 +20,21 @@
 
 本项目没有混用 ComfyUI 模型、节点或工作流，也不同于 `mmh3turbo`。
 
+## 外部 MLX 运行时
+
+本项目不复制推理引擎源码。当前操作配置使用
+[`datehoer/mlx-h3`](https://github.com/datehoer/mlx-h3) fork 的默认
+`h3mlx-local-profile` 分支；它在上游 `appautomaton/mlx-h3` 基础上保留了本机
+2-bit/4-bit 权重所需的 compact-quantization 元数据兼容，以及经过实机验证的
+进程/系统 swap 关联保护：
+
+```sh
+git clone https://github.com/datehoer/mlx-h3.git
+```
+
+当前 profile 头提交为 `d5d1791`。模型权重仍需单独存放，并通过
+`h3mlx.local.toml` 引用；不要放入任一 Git 仓库。
+
 ## 当前机器一分钟开始
 
 本机已经生成了被 Git 忽略的 `h3mlx.local.toml`，不需要再次填写路径：
