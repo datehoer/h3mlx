@@ -69,5 +69,12 @@ total sequence 16,844
 The required files total more than physical memory, but they are not simultaneously
 resident. The verified DiT phase used 11.2 GiB active MLX memory and peaked at 14.5 GiB.
 The configured 20 GiB guard is below this machine's approximately 21.3 GiB recommended
-MLX working-set limit. The guard fails on budget overflow, swap growth, or dangerous
-compressor growth rather than silently paging through inference.
+MLX working-set limit. The guard fails on budget overflow, process-attributed swap growth,
+or dangerous compressor growth rather than silently paging through inference. macOS
+system swap counters cannot identify the owner of an evicted page, so `vmmap -summary`
+tracks the `mlx-h3` PID separately. System swap growth attributed outside that PID
+remains visible as telemetry but is not by itself a generation failure. Process swap is
+measured cumulatively from the run baseline, but `vmmap` also counts compressed/evicted
+private pages that have not reached disk. The guard treats paging as model-attributed only
+when both the process counter and system disk-swap usage grow by more than 64 MiB. Growth
+in either counter alone is telemetry rather than a hard failure.

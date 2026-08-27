@@ -22,8 +22,13 @@ destination appears only after FFmpeg succeeds and atomically renames its tempor
 ## Memory free percentage is low
 
 During the verified DiT phase it fell to 28–29% with zero swap. Use the telemetry as a
-set: active memory, peak, cache, swap, and free percentage. Never weaken the guard. A
-swap increase is a hard failure even if generation continues.
+set: active memory, peak, cache, system swap, process swap, and free percentage. The
+report prints system-wide swap as `sys` and pages attributed by `vmmap` to the current
+`mlx-h3` PID as `self`. The `vmmap` `self` value includes compressed or otherwise evicted
+private pages and is not proof of disk swap by itself. A swap hard failure therefore
+requires both `self` and `sys` to grow by more than 64 MiB from the run baseline. Growth
+in only one counter remains telemetry and does not stop generation. Low free memory
+combined with dangerous compressor growth remains a separate hard stop.
 
 ## Output exists but content is wrong
 

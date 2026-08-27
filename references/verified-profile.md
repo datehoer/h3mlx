@@ -20,6 +20,13 @@ verified run: `src/mlx_h3/loading.py` and `tests/test_loading.py`. They add and 
 parsing of compact MLX-Serve metadata such as `affine 2-bit g64`. Preserve or upstream
 that change before expecting this model pack to load.
 
+The current operational profile additionally carries a reviewed `vmmap` process-swap
+attribution change in `src/mlx_h3/memory.py` and `tests/test_memory.py`. It was added
+after the recorded baseline run to correlate system disk-swap movement with pages
+compressed or evicted from the `mlx-h3` process. Because `vmmap` process totals are not
+disk-swap proof alone, the guard requires material growth in both counters. This changes
+the guard decision and telemetry, not model numerics or the staged-residency order.
+
 ## Models
 
 | Role | Precision | Bytes | Notes |

@@ -76,10 +76,13 @@ def inspect(config: ProjectConfig) -> dict[str, Any]:
 
     ffmpeg = shutil.which("ffmpeg")
     ffprobe = shutil.which("ffprobe")
+    vmmap = shutil.which("vmmap")
     if ffmpeg is None:
         issues.append("ffmpeg is not available on PATH")
     if ffprobe is None:
         issues.append("ffprobe is not available on PATH")
+    if vmmap is None:
+        issues.append("vmmap is not available on PATH for process swap attribution")
     if not config.runtime.repo.is_dir():
         issues.append(f"runtime repository is missing: {config.runtime.repo}")
     if not config.runtime.executable.is_file():
@@ -138,6 +141,14 @@ def inspect(config: ProjectConfig) -> dict[str, Any]:
             "mlx-h3 loader lacks the local compact quantization-metadata patch "
             "required by these 2-bit/4-bit MLX-Serve checkpoints"
         )
+    memory_guard = config.runtime.repo / "src/mlx_h3/memory.py"
+    if memory_guard.is_file() and "PROCESS SWAPPING" not in memory_guard.read_text(
+        encoding="utf-8"
+    ):
+        issues.append(
+            "mlx-h3 memory guard lacks the local vmmap process-swap attribution "
+            "patch required by this operational profile"
+        )
 
     usage = shutil.disk_usage(
         config.output_dir.parent if config.output_dir.parent.exists() else Path("/")
@@ -149,7 +160,8 @@ def inspect(config: ProjectConfig) -> dict[str, Any]:
     if runtime_git.get("dirty"):
         warnings.append(
             "external mlx-h3 checkout has uncommitted changes; the verified profile "
-            "expects the compact-metadata loader patch and its test"
+            "expects the reviewed compact-metadata and process-swap attribution patches "
+            "and their tests"
         )
 
     return {
@@ -161,7 +173,7 @@ def inspect(config: ProjectConfig) -> dict[str, Any]:
         "device": device,
         "versions": versions,
         "runtime_git": runtime_git,
-        "tools": {"ffmpeg": ffmpeg, "ffprobe": ffprobe},
+        "tools": {"ffmpeg": ffmpeg, "ffprobe": ffprobe, "vmmap": vmmap},
         "models": models,
         "storage": {
             "output_dir": str(config.output_dir),
